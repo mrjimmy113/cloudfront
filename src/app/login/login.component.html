@@ -5,11 +5,23 @@
       <fieldset>
         <legend class="d-flex justify-content-center">Logo</legend>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="username" placeholder="Enter Username">
+          <input type="text" [ngClass]="{'form-control': true, 'is-invalid' : (isSubmit && f.username.errors)}" 
+          formControlName="username" placeholder="Enter Username">
+          <div *ngIf="isSubmit && f.username.errors" >
+            <div *ngIf="f.username.errors.required">
+              <div class="text-danger">Please fill in your username</div>
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" formControlName="password" placeholder="Enter Password">
-        </div>
+            <input type="password" [ngClass]="{'form-control': true, 'is-invalid' : (isSubmit && f.password.errors)}" 
+            formControlName="password" placeholder="Enter Password">
+            <div *ngIf="isSubmit && f.password.errors" >
+              <div *ngIf="f.password.errors.required">
+                <div class="text-danger">Please fill in your password</div>
+              </div>
+            </div>
+          </div>
         <div class="d-flex justify-content-around">
           <button type="submit" class="btn btn-info">Login</button>
           <button class="btn btn-info">Sign Up</button>

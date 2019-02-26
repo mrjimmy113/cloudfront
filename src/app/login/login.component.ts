@@ -2,7 +2,7 @@
 import { AccountService } from './../account.service';
 import { Component, OnInit } from '@angular/core';
 import { appInitializerFactory } from '@angular/platform-browser/src/browser/server-transition';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +10,28 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl('')
-  });
-
+  private loginForm;
+  isSubmit = false;
   constructor(private api:AccountService) { }
 
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      username: new FormControl('',Validators.required),
+      password: new FormControl('', Validators.required)
+    });
+  
   }
-
+  
+  get f() {return this.loginForm.controls}
 
   onSubmit() {
-    let loginInfor = this.loginForm.value;
-    this.api.login(loginInfor.username, loginInfor.password).subscribe(result => console.log(result));
+    // let loginInfor = this.loginForm.value;
+    // this.api.login(loginInfor.username, loginInfor.password).subscribe(result => console.log(result));
+    this.isSubmit = true;
+    if(this.loginForm.invalid) {
+      console.log('CL');
+      return;
+    }
   }
 
 }
