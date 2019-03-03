@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <form #gearForm="ngForm" (ngSubmit)='onSubmit()'>
+      <fieldset>
+        <legend class="d-flex justify-content-center">New Gear</legend>
+        <!--Name-->
+        <div class="form-group">
+          <label>Gear name</label>
+          <input type="text" class="form-control" name="name" #name='ngModel' placeholder="Enter Gear name"
+            [(ngModel)]="gear.name" required [ngClass]="{'is-invalid': (name.invalid && (name.dirty || name.touched))}">
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+            <div *ngIf="name.errors.required">
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <!--Description-->
+        <div class="form-group">
+          <label>Gear Description</label>
+          <textarea class="form-control" name="description" placeholder="Fill in gear`s description" rows="3"
+            [(ngModel)]="gear.description"></textarea>
+
+        </div>
+        <!--Price-->
+        <div class="form-group">
+          <label>Price</label>
+          <div class="input-group mb-3">
+
+            <input type="number" class="form-control" placeholder="Enter Gear price" name="price"
+              [(ngModel)]="gear.price" required #price='ngModel' pattern="^[1-9]?[0-9]{1,9}$"
+              [ngClass]="{'is-invalid': (price.invalid && (price.dirty || price.touched))}">
+            <div class="input-group-append">
+              <span class="input-group-text">VNĐ</span>
+            </div>
+          </div>
+          <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">
+            <div *ngIf="price.errors.required">
+              Price is required.
+            </div>
+            <div *ngIf="price.errors.pattern">
+              Price MAX Digit is 10
+            </div>
+          </div>
+
+        </div>
+        <!--Type Select-->
+        <div class="form-group">
+          <label>Gear Type</label>
+          <select class="form-control" required name="typeId" [(ngModel)]="gear.typeId" #typeId='ngModel'>
+            <option *ngFor="let type of typeList" [value]="type.id">{{type.name}}</option>
+          </select>
+          <div *ngIf="typeId.invalid && (typeId.dirty || typeId.touched)" class="text-danger">
+            <div *ngIf="typeId.errors.required">
+              Choose a type
+            </div>
+          </div>
+        </div>
+        <!--Image-->
+        <div class="form-group">
+          <label>Image</label> <br>
+          <input type="file" (change)="onFileChange($event)" name="image" [(ngModel)]="gear.avatarURL" #imageH='ngModel'
+            required pattern="([^\s]+(\.)(jpg|png|gif|bmp)$)">
+          <div *ngIf="imageH.invalid && (imageH.dirty || imageH.touched)" class="text-danger">
+            <div *ngIf="imageH.errors.required">
+              Image is required
+            </div>
+            <div *ngIf="imageH.errors.pattern">
+                This file is not an image
+              </div>
+          </div>
+          
+        </div>
+        <!--Action Button-->
+        <div class="d-flex justify-content-around">
+          <button type="submit" class="btn btn-info" [disabled]='!gearForm.form.valid'>Create</button>
+          <button type="reset" class="btn btn-info">Reset</button>
+
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

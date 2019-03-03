@@ -25,13 +25,12 @@ export class LoginComponent implements OnInit {
   get f() {return this.loginForm.controls}
 
   onSubmit() {
-    // let loginInfor = this.loginForm.value;
-    // this.api.login(loginInfor.username, loginInfor.password).subscribe(result => console.log(result));
     this.isSubmit = true;
     if(this.loginForm.invalid) {
-      console.log('CL');
       return;
     }
+    let loginInfor = this.loginForm.value;
+    this.api.login(loginInfor.username, loginInfor.password).subscribe(result => console.log(result));
   }
 
 }
