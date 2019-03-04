@@ -5,15 +5,20 @@
       <th scope="col">Image</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
+    
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let gear of gearList">
+    <tr *ngFor="let gear of gearList" (click)="goToUpdate(gear)">
       <th scope="row">
         <img src="{{gear.avatarURL}}" width="100px" height="100px"/>
       </th>
-      <td>{{gear.name}}</td>
-      <td>{{gear.price}}</td>
+      <td class="align-middle">{{gear.name}}</td>
+      <td class="align-middle">{{gear.price}}</td>
+      <td class="align-middle">
+        <button class="btn btn-danger" (click)="deleteGear(gear)">DELETE</button>
+      </td>
     </tr>
   </tbody>
 </table>
+

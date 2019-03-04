@@ -26,7 +26,6 @@ export class AdminGearInsertComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("Chết mọe đi Kiều Trọng Khánh");
     const fd = new FormData();
     fd.append('image',this.tmp,this.tmp.name); 
     fd.append('gearInfo', JSON.stringify(this.gear));

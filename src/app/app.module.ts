@@ -9,6 +9,7 @@ import { AdminDashComponent } from './admin-dash/admin-dash.component';
 import { AdminGearComponent } from './admin-gear/admin-gear.component';
 import { AdminGearInsertComponent } from './admin-gear-insert/admin-gear-insert.component';
 import { AdminGearDashComponent } from './admin-gear-dash/admin-gear-dash.component';
+import { AdminGearUpdateComponent } from './admin-gear-update/admin-gear-update.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AdminGearDashComponent } from './admin-gear-dash/admin-gear-dash.compon
     AdminDashComponent,
     AdminGearComponent,
     AdminGearInsertComponent,
-    AdminGearDashComponent
+    AdminGearDashComponent,
+    AdminGearUpdateComponent
   ],
   imports: [
     BrowserModule,

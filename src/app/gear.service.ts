@@ -10,7 +10,9 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class GearService {
   private createAPI = "gear/create";
-  private getAllAPI = "gear/getAll"
+  private getAllAPI = "gear/getAll";
+  private deleteAPI = "gear/delete";
+  private updateAPI = "gear/update";
   constructor(private http: HttpClient) { }
 
   create(gear):Observable<string> {
@@ -19,5 +21,11 @@ export class GearService {
 
   getALL():Observable<Gear[]> {
     return this.http.get<Gear[]>(environment.apiEndPoint + this.getAllAPI);
+  }
+  deleteGear(infor):Observable<string> {
+    return this.http.post<string>(environment.apiEndPoint + this.deleteAPI,infor);
+  }
+  update(gear):Observable<string> {
+    return this.http.post<string>(environment.apiEndPoint + this.updateAPI,gear);
   }
 }

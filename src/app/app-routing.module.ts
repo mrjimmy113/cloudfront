@@ -1,3 +1,4 @@
+import { AdminGearUpdateComponent } from './admin-gear-update/admin-gear-update.component';
 import { AdminGearDashComponent } from './admin-gear-dash/admin-gear-dash.component';
 import { AdminGearInsertComponent } from './admin-gear-insert/admin-gear-insert.component';
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
@@ -10,6 +11,7 @@ const routes : Routes = [
   {path: 'admin/dashboard', component: AdminDashComponent},
   {path: 'admin/gear/insert', component: AdminGearInsertComponent},
   {path: 'admin/gear/dash', component: AdminGearDashComponent},
+  {path: 'admin/gear/update', component: AdminGearUpdateComponent}
 ];
 
 @NgModule({
