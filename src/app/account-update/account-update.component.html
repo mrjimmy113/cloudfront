@@ -1,3 +1,137 @@
-<p>
-  account-update works!
-</p>
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="list-group col-sm-3">
+    <button class="list-group-item list-group-item-action" [ngClass]="{'active': currentTab == 1}"
+      (click)="changeTab(1)">
+      Change Infor
+    </button>
+    <button class="list-group-item list-group-item-action" [ngClass]="{'active': currentTab == 2}"
+      (click)="changeTab(2)">
+      Change Password
+    </button>
+    <button class="list-group-item list-group-item-action" [ngClass]="{'active': currentTab == 3}"
+      (click)="changeTab(3)">
+      Your Orders
+    </button>
+  </div>
+  <div class="col-sm-8">
+    <!--Change Infor-->
+    <div [hidden]="!(currentTab == 1)">
+      <div class="row">
+        <form #inforForm="ngForm" (ngSubmit)="changeInfor()" class="col-sm-8">
+          <legend class="d-flex justify-content-center">Change Information</legend>
+          <!--First Name-->
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="firstName" #firstName='ngModel'
+              [(ngModel)]="account.firstName" required maxlength="256" placeholder="Enter First Name"
+              [ngClass]="{'is-invalid': (firstName.invalid &&(firstName.dirty || firstName.touched))}">
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="text-danger">
+              <div *ngIf="firstName.errors.required">
+                First Name is required
+              </div>
+            </div>
+          </div>
+          <!--Last Name-->
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="lastName" #lastName='ngModel' [(ngModel)]="account.lastName"
+              placeholder="Enter Last name" required maxlength="256"
+              [ngClass]="{'is-invalid': (lastName.invalid &&(lastName.dirty || lastName.touched))}">
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="text-danger">
+              <div *ngIf="lastName.errors.required">
+                Last Name is required
+              </div>
+            </div>
+          </div>
+          <!--Address-->
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="form-control" name="address" #address='ngModel' placeholder="Enter Address"
+              [(ngModel)]="account.address" required maxlength="500"
+              [ngClass]="{'is-invalid': (address.invalid && (address.dirty || address.touched))}">
+            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="text-danger">
+              <div *ngIf="address.errors.required">
+                Address is required.
+              </div>
+              <div *ngIf="address.errors.maxlength">
+                Address max length is 500
+              </div>
+            </div>
+          </div>
+          <!--Phone Number-->
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" class="form-control" name="phoneNumber" #phoneNumber='ngModel'
+              placeholder="Enter Phone number" [(ngModel)]="account.phoneNumber" required maxlength="15"
+              pattern="[0-9]*"
+              [ngClass]="{'is-invalid': (phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched))}">
+            <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="text-danger">
+              <div *ngIf="phoneNumber.errors.required">
+                Phone Number is required.
+              </div>
+              <div *ngIf="phoneNumber.errors.pattern">
+                Phone Number must be number
+              </div>
+            </div>
+          </div>
+          <!--Action Button-->
+          <div class="d-flex justify-content-around">
+            <button type="submit" class="btn btn-info" [disabled]="!inforForm.form.valid">Save</button>
+            <button type="button" class="btn btn-info" (click)="resetInfor()">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--Change Password-->
+    <div [hidden]="!(currentTab == 2)">
+      <form #passwordForm="ngForm" (ngSubmit)="changePassword()" class="col-sm-8">
+        <legend class="d-flex justify-content-center">Change Password</legend>
+        <!--Old Password-->
+        <div class="form-group">
+          <label>Old Password</label>
+          <input type="password" class="form-control" placeholder="Enter old password" [(ngModel)]="oldPassword"
+            name="oldPassword">
+          <div *ngIf="wrongOldPass" class="text-danger">
+            Old Password is Wrong
+          </div>
+        </div>
+        <!--Password-->
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" class="form-control" name="password" #password='ngModel'
+            placeholder="Enter  new password" [(ngModel)]="newPassword" required maxlength="20" minlength="4"
+            [ngClass]="{'is-invalid': (password.invalid && (password.dirty || password.touched))}">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+            <div *ngIf="password.errors.required">
+              Password is required.
+            </div>
+            <div *ngIf="password.errors.maxlength || password.errors.minlength">
+              Password length is from 4 to 30
+            </div>
+          </div>
+        </div>
+        <!--Confirm Password-->
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" class="form-control" name="confirm" #confirm='ngModel'
+            placeholder="Enter New Password again" pattern="{{newPassword}}" [(ngModel)]="confirmPassword"
+            [ngClass]="{'is-invalid': (confirm.invalid && (confirm.dirty || confirm.touched))}">
+          <div *ngIf="confirm.invalid && (confirm.dirty || confirm.touched)" class="text-danger">
+            <div *ngIf="confirm.errors.pattern">
+              Confirm Password and Password must be the same
+            </div>
+          </div>
+        </div>
+        <!--Action Button-->
+        <div class="d-flex justify-content-around">
+          <button class="btn btn-info" type="submit" [disabled]="!passwordForm.form.valid">Save</button>
+        </div>
+      </form>
+    </div>
+    <!--Order List-->
+    <div [hidden]="!(currentTab == 3)">
+      Order List
+    </div>
+  </div>
+</div>

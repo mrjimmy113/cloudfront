@@ -32,11 +32,7 @@ export class LoginComponent implements OnInit {
     }
     let loginInfor = this.loginForm.value;
     this.api.login(loginInfor.username, loginInfor.password).subscribe(result => {
-       let account = {
-         firstName: result.firstName,
-         lastName: result.lastName,
-         isAdmin: result.isAdmin
-       }
+       let account = result;
       sessionStorage.setItem('account', JSON.stringify(account));
       if(account.isAdmin) {
         this.router.navigate(['admin/dashboard'])

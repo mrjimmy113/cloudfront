@@ -24,6 +24,8 @@ export class AccountService {
   private getALLAPI = "account/getAll";
   private deleteAPI = "account/dash/";
   private makeAdminAPI = "account/dash/";
+  private changeInforAPI = "account/change/infor";
+  private changePasswordAPI = "account/change/password";
   constructor(private http: HttpClient) { }
 
   login(username, password) : Observable<Account> {
@@ -47,6 +49,12 @@ export class AccountService {
   }
   makeAdmin(id):Observable<string> {
     return this.http.get<string>(environment.apiEndPoint + this.makeAdminAPI + id);
+  }
+  changeInfor(account):Observable<Account> {
+    return this.http.post<Account>(environment.apiEndPoint + this.changeInforAPI,account);
+  }
+  changePassword(account):Observable<Account> {
+    return this.http.post<Account>(environment.apiEndPoint + this.changePasswordAPI,account);
   }
 }
 

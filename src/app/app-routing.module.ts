@@ -1,3 +1,4 @@
+import { AccountUpdateComponent } from './account-update/account-update.component';
 import { AdminAccountDashComponent } from './admin-account-dash/admin-account-dash.component';
 import { AccountRegComponent } from './account-reg/account-reg.component';
 import { AdminGearUpdateComponent } from './admin-gear-update/admin-gear-update.component';
@@ -15,7 +16,8 @@ const routes : Routes = [
   {path: 'admin/gear/dash', component: AdminGearDashComponent},
   {path: 'admin/gear/update', component: AdminGearUpdateComponent},
   {path: 'signUp', component: AccountRegComponent},
-  {path: 'admin/account/dash', component:AdminAccountDashComponent}
+  {path: 'admin/account/dash', component:AdminAccountDashComponent},
+  {path: 'accountInfor', component: AccountUpdateComponent}
 ];
 
 @NgModule({

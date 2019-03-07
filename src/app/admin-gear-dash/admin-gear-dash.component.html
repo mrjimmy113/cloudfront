@@ -1,24 +1,24 @@
-
+<a class="btn btn-info" href="/admin/gear/insert">Create new gear</a>
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">Image</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
-    
+
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let gear of gearList" (click)="goToUpdate(gear)">
+    <tr *ngFor="let gear of gearList">
       <th scope="row">
-        <img src="{{gear.avatarURL}}" width="100px" height="100px"/>
+        <img src="{{gear.avatarURL}}" width="100px" height="100px" />
       </th>
       <td class="align-middle">{{gear.name}}</td>
       <td class="align-middle">{{gear.price}}</td>
       <td class="align-middle">
+        <button class="btn btn-info" (click)="goToUpdate(gear)">UPDATE</button>
         <button class="btn btn-danger" (click)="deleteGear(gear)">DELETE</button>
       </td>
     </tr>
   </tbody>
 </table>
-

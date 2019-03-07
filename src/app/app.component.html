@@ -12,10 +12,11 @@
       
       <div *ngIf="!checkLogin()">
         <a class="btn btn-info" href="/login">Login</a>
+        <a class="btn btn-info" href="/signUp">Sign Up</a>
       </div>
       <div *ngIf="checkLogin()">
-            {{name}}
-        <button class="btn btn-danger" (click)="logout()">Log out</button>
+        <a href="/accountInfor" class="text-success">{{name}}    </a>
+        <button class="btn btn-danger" (click)="logout()" >Log out</button>
       </div>
     </div>
   </div>
