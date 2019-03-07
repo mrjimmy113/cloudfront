@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <form #accountForm="ngForm" (ngSubmit)='onSubmit()'>
+      <fieldset>
+        <legend class="d-flex justify-content-center">New Account</legend>
+        <!--Name-->
+        <div class="form-group">
+          <label>Username</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" name="username" #username='ngModel' placeholder="Enter Username"
+              [(ngModel)]="account.username" required maxlength="30" minlength="4"
+              [ngClass]="{'is-invalid': (username.invalid && (username.dirty || username.touched))}"
+              (keyup)="checkUsernameAgain()"
+              >
+            <div class="input-group-append">
+              <div *ngIf="haveNotChecked">
+                <button class="btn btn-success" (click)="checkUsername(account.username)"
+                  [disabled]="username.invalid || !(username.dirty || username.touched)">Check Username</button>
+              </div>
+              <div *ngIf="!haveNotChecked">
+                  <div *ngIf="isAccountExisted">
+                      <div class="btn btn-danger">Not Available</div>
+                    </div>
+                <div *ngIf="!isAccountExisted">
+                  <div class="btn btn-success">Available</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="username.invalid && (username.dirty || username.touched)" class="text-danger">
+            <div *ngIf="username.errors.required">
+              Username is required.
+            </div>
+            <div *ngIf="username.errors.maxlength || username.errors.minlength">
+              Username length is from 4 to 30
+            </div>
+          </div>
+        </div>
+        <!--Password-->
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" #password='ngModel' placeholder="Enter password"
+            [(ngModel)]="account.password" required maxlength="20" minlength="4"
+            [ngClass]="{'is-invalid': (password.invalid && (password.dirty || password.touched))}">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+            <div *ngIf="password.errors.required">
+              Password is required.
+            </div>
+            <div *ngIf="password.errors.maxlength || password.errors.minlength">
+              Password length is from 4 to 30
+            </div>
+          </div>
+        </div>
+        <!--Confirm Password-->
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" class="form-control" name="confirm" #confirm='ngModel'
+            placeholder="Enter Password again" pattern="{{account.password}}" [(ngModel)]="confirmPassword"
+            [ngClass]="{'is-invalid': (confirm.invalid && (confirm.dirty || confirm.touched))}">
+          <div *ngIf="confirm.invalid && (confirm.dirty || confirm.touched)" class="text-danger">
+            <div *ngIf="confirm.errors.pattern">
+              Confirm Password and Password must be the same
+            </div>
+          </div>
+        </div>
+        <!--First Name-->
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" class="form-control" name="firstName" #firstName='ngModel' placeholder="Enter Firstname"
+            [(ngModel)]="account.firstName" required maxlength="256"
+            [ngClass]="{'is-invalid': (firstName.invalid && (firstName.dirty || firstName.touched))}">
+          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="text-danger">
+            <div *ngIf="firstName.errors.required">
+              Firstname is required.
+            </div>
+            <div *ngIf="firstName.errors.maxlength">
+              Firstname max length is 256
+            </div>
+          </div>
+        </div>
+        <!--Last Name-->
+        <div class="form-group">
+          <label>Lastname</label>
+          <input type="text" class="form-control" name="lastName" #lastName='ngModel' placeholder="Enter Lastname"
+            [(ngModel)]="account.lastName" required maxlength="256"
+            [ngClass]="{'is-invalid': (lastName.invalid && (lastName.dirty || lastName.touched))}">
+          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="text-danger">
+            <div *ngIf="lastName.errors.required">
+              Lastname is required.
+            </div>
+            <div *ngIf="lastName.errors.maxlength">
+              Lastname max length is 256
+            </div>
+          </div>
+        </div>
+        <!--Address-->
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" class="form-control" name="address" #address='ngModel' placeholder="Enter Address"
+            [(ngModel)]="account.address" required maxlength="500"
+            [ngClass]="{'is-invalid': (address.invalid && (address.dirty || address.touched))}">
+          <div *ngIf="address.invalid && (address.dirty || address.touched)" class="text-danger">
+            <div *ngIf="address.errors.required">
+              Address is required.
+            </div>
+            <div *ngIf="address.errors.maxlength">
+              Address max length is 500
+            </div>
+          </div>
+        </div>
+        <!--Phone Number-->
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" class="form-control" name="phoneNumber" #phoneNumber='ngModel'
+            placeholder="Enter Phone number" [(ngModel)]="account.phoneNumber" required maxlength="15" pattern="[0-9]*"
+            [ngClass]="{'is-invalid': (phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched))}">
+          <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="text-danger">
+            <div *ngIf="phoneNumber.errors.required">
+              Phone Number is required.
+            </div>
+            <div *ngIf="phoneNumber.errors.maxlength">
+              Phone Number max length is 15
+            </div>
+            <div *ngIf="phoneNumber.errors.pattern">
+              Phone Number must be number
+            </div>
+          </div>
+        </div>
+        <!--Action Button-->
+        <div class="d-flex justify-content-around">
+          <button type="submit" class="btn btn-info" [disabled]='!accountForm.form.valid'>Sign Up</button>
+          <button type="reset" class="btn btn-info">Reset</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

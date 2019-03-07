@@ -6,5 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cloudfront';
+  name;
+  checkLogin() {
+    let account = sessionStorage.getItem('account');
+    if(account) {
+      let tmp = JSON.parse(account);
+      this.name = tmp.firstName +' ' + tmp.lastName; 
+      return true;
+    }
+    
+    return false;
+  }
+  logout() {
+    sessionStorage.removeItem('account');
+  }
 }

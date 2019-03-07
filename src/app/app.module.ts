@@ -10,6 +10,9 @@ import { AdminGearComponent } from './admin-gear/admin-gear.component';
 import { AdminGearInsertComponent } from './admin-gear-insert/admin-gear-insert.component';
 import { AdminGearDashComponent } from './admin-gear-dash/admin-gear-dash.component';
 import { AdminGearUpdateComponent } from './admin-gear-update/admin-gear-update.component';
+import { AccountRegComponent } from './account-reg/account-reg.component';
+import { AccountUpdateComponent } from './account-update/account-update.component';
+import { AdminAccountDashComponent } from './admin-account-dash/admin-account-dash.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { AdminGearUpdateComponent } from './admin-gear-update/admin-gear-update.
     AdminGearComponent,
     AdminGearInsertComponent,
     AdminGearDashComponent,
-    AdminGearUpdateComponent
+    AdminGearUpdateComponent,
+    AccountRegComponent,
+    AccountUpdateComponent,
+    AdminAccountDashComponent
   ],
   imports: [
     BrowserModule,
