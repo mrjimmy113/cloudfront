@@ -130,8 +130,48 @@
       </form>
     </div>
     <!--Order List-->
-    <div [hidden]="!(currentTab == 3)">
-      Order List
+    <div [hidden]="!(currentTab == 3)" class="row">
+      <div class="card mb-3" *ngFor="let order of orderList; let z = index" style="min-width: 40rem;">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-5">
+              <h5>Order No.{{order.id}}</h5>
+            </div>
+            <div class="col-sm-5">
+              {{order.createdDate}}
+            </div>
+            <div class="col-sm-2">
+              <div *ngIf="order.isFinished">
+                <span class="badge badge-pill badge-success">DONE</span>
+              </div>
+              <div *ngIf="!order.isFinished">
+                <span class="badge badge-pill badge-warning">PENDING</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+              <div class="col-sm-8 ">
+                  <div class="row card-text" *ngFor="let item of order.nameList; let i = index">
+                    <div class="border-left-0">
+                      <span class="text-info">{{item}}</span> - 
+                      <span class="text-success">{{order.priceList[i]}} VND</span> x
+                      <span class="text-danger">{{order.quantityList[i]}}</span> 
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center">
+                  <div  class="text-success">
+                    Total: {{totalList[z]}} VND
+                  </div>
+                </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-danger" (click)="cancel(order.id)">Cancel</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

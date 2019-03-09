@@ -8,6 +8,7 @@ import { AdminDashComponent } from './admin-dash/admin-dash.component';
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { SearchComponent } from './search/search.component';
 
 const routes : Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,7 +18,8 @@ const routes : Routes = [
   {path: 'admin/gear/update', component: AdminGearUpdateComponent},
   {path: 'signUp', component: AccountRegComponent},
   {path: 'admin/account/dash', component:AdminAccountDashComponent},
-  {path: 'accountInfor', component: AccountUpdateComponent}
+  {path: 'accountInfor', component: AccountUpdateComponent},
+  {path: 'search/:value', component: SearchComponent}
 ];
 
 @NgModule({

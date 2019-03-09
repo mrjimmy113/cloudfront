@@ -13,6 +13,8 @@ export class GearService {
   private getAllAPI = "gear/getAll";
   private deleteAPI = "gear/delete";
   private updateAPI = "gear/update";
+  private getPageAPI = "gear/getPage/";
+  private getMaxPageAPI = "gear/getMaxPage/";
   constructor(private http: HttpClient) { }
 
   create(gear):Observable<string> {
@@ -27,5 +29,11 @@ export class GearService {
   }
   update(gear):Observable<string> {
     return this.http.post<string>(environment.apiEndPoint + this.updateAPI,gear);
+  }
+  getPage(search,page):Observable<Gear[]> {
+    return this.http.get<Gear[]>(environment.apiEndPoint + this.getPageAPI + search + "&" + page);
+  }
+  getMaxPage(search):Observable<string> {
+    return this.http.get<string>(environment.apiEndPoint + this.getMaxPageAPI + search);
   }
 }

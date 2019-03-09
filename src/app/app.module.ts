@@ -13,6 +13,7 @@ import { AdminGearUpdateComponent } from './admin-gear-update/admin-gear-update.
 import { AccountRegComponent } from './account-reg/account-reg.component';
 import { AccountUpdateComponent } from './account-update/account-update.component';
 import { AdminAccountDashComponent } from './admin-account-dash/admin-account-dash.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AdminAccountDashComponent } from './admin-account-dash/admin-account-da
     AdminGearUpdateComponent,
     AccountRegComponent,
     AccountUpdateComponent,
-    AdminAccountDashComponent
+    AdminAccountDashComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

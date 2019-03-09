@@ -1,24 +1,26 @@
 <div class="navbar navbar-dark bg-dark">
-    <div class="col-sm-3 d-flex justify-content-around">
-      <span class="">Logo</span>
-    </div>
-    <div class="col-sm-6">
-      <form class="">
-        <input class="form-control" type="text" placeholder="Search">
-        
-      </form>
-    </div>
-    <div class="col-sm-3 d-flex justify-content-end">
-      
-      <div *ngIf="!checkLogin()">
-        <a class="btn btn-info" href="/login">Login</a>
-        <a class="btn btn-info" href="/signUp">Sign Up</a>
+  <div class="col-sm-3 d-flex justify-content-around">
+    <span class="">Logo</span>
+  </div>
+  <div class="col-sm-6">
+    <form #searchForm="ngForm" (ngSubmit)="searchOp()">
+      <div class="row">
+        <input class="form-control col-sm-10" type="text" placeholder="Search" name="search" [(ngModel)]="searchText"
+          #search="ngModel" required>
+        <button class="btn btn-info col-sm-2"  [disabled]="!searchForm.form.valid">Search</button>
       </div>
-      <div *ngIf="checkLogin()">
-        <a href="/accountInfor" class="text-success">{{name}}    </a>
-        <button class="btn btn-danger" (click)="logout()" >Log out</button>
-      </div>
+    </form>
+  </div>
+  <div class="col-sm-3 d-flex justify-content-end">
+
+    <div *ngIf="!checkLogin()">
+      <a class="btn btn-info" href="/login">Login</a>
+      <a class="btn btn-info" href="/signUp">Sign Up</a>
+    </div>
+    <div *ngIf="checkLogin()">
+      <a href="/accountInfor" class="text-success">{{name}} </a>
+      <button class="btn btn-danger" (click)="logout()">Log out</button>
     </div>
   </div>
+</div>
 <router-outlet></router-outlet>
-

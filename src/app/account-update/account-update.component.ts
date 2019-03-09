@@ -2,6 +2,7 @@ import { AccountService } from './../account.service';
 import { Account } from './../model/account';
 import { Component, OnInit } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-account-update',
@@ -13,8 +14,10 @@ export class AccountUpdateComponent implements OnInit {
   account:Account;
   newPassword;
   oldPassword;
+  orderList;
   wrongOldPass = false;
-  constructor(private accountSer:AccountService) { }
+  totalList = new Array();
+  constructor(private accountSer:AccountService, private orderSer:OrderService) { }
 
   ngOnInit() {
     this.account = JSON.parse(sessionStorage.getItem('account'));
@@ -23,6 +26,9 @@ export class AccountUpdateComponent implements OnInit {
   changeTab(num) {
     if(num == 1 || num == 2) {
       this.resetInfor();
+    }
+    if(num == 3) {
+      this.orderPrepare();
     }
     this.currentTab = num;
   }
@@ -50,5 +56,22 @@ export class AccountUpdateComponent implements OnInit {
     }else {
       this.wrongOldPass = true;
     }
+  }
+  cancel(id) {
+    this.orderSer.deleteOrder(id).subscribe(() => {
+      this.orderPrepare();
+    })
+  }
+  orderPrepare() {
+    this.orderSer.getOrderAccId(this.account.id).subscribe(result => {
+      this.orderList = result;
+      for (let i = 0; i < this.orderList.length; i++) {
+        let total = 0;
+        for (let j = 0; j < this.orderList[i].quantityList.length; j++) {
+          total = (this.orderList[i].quantityList[j] * this.orderList[i].priceList[j]) + total;
+        }
+        this.totalList.push(total);
+      }
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   name;
+  searchText;
+  constructor(private router:Router){}
+
   checkLogin() {
     let account = sessionStorage.getItem('account');
     if(account) {
@@ -19,5 +23,8 @@ export class AppComponent {
   }
   logout() {
     sessionStorage.removeItem('account');
+  }
+  searchOp() {
+    this.router.navigateByUrl("/search/" + this.searchText);
   }
 }
