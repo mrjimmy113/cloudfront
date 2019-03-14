@@ -1,7 +1,8 @@
+import { LoaderService } from './../loader.service';
 import { GearService } from './../gear.service';
 import { Gear } from './../model/gear';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TypeService } from '../type.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class AdminGearUpdateComponent implements OnInit {
   typeList;
   dumpFileInput;
   oldFileName;
-  constructor(private router:ActivatedRoute, private typeSer:TypeService, private gearSer:GearService) { }
+  constructor(private router:ActivatedRoute, private typeSer:TypeService, 
+    private gearSer:GearService,private loader:LoaderService, private route:Router) { }
 
   ngOnInit() {
     console.log(this.router.params);
@@ -31,15 +33,18 @@ export class AdminGearUpdateComponent implements OnInit {
     this.tmp = event.target.files[0];
   }
   onSubmit() {
+    this.loader.show();
     const fd = new FormData();
-    console.log(this.oldFileName);
     if(this.tmp != null) {
       fd.append('image',this.tmp,this.tmp.name); 
     }
     this.gear.avatarURL = this.oldFileName;
     fd.append('gearInfo', JSON.stringify(this.gear));
-    console.log(this.gear);
-    this.gearSer.update(fd).subscribe(rep => console.log(rep));
+    this.gearSer.update(fd).subscribe(rep => {
+      alert('Gear Updated');
+      this.loader.hide();
+      this.route.navigate(['admin/gear/dash']);
+    });
   }
 
 }

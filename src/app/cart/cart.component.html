@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div *ngIf="orderList">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Gear</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Unit Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-secondary" *ngFor="let order of orderList">
+            <td>
+              <button class="btn btn-danger	glyphicon glyphicon-trash" (click)="removeItem(order.gearId)">DEL</button>
+              {{order.name}}
+            </td>
+            <td scope="row">
+              <button (click)="down(order)" class="btn btn-info btn-sm"
+                [disabled]="order.quantity == 1">&#10094;</button>
+              <span class="btn">{{order.quantity}} </span>
+              <button (click)="up(order)" class="btn btn-info btn-sm">&#10095;</button>
+            </td>
+
+            <td>
+              <span class="btn">{{order.price | number}}&#8363;</span>
+
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end">
+        <span class="text-info">Total Price: </span> {{total | number }}&#8363;
+      </div>
+
+      <div class="d-flex justify-content-center ">
+
+        <button class="btn btn-success" (click)="submitOrder()">Submit Order</button>
+      </div>
+    </div>
+
+
+    <div *ngIf="!orderList" class="d-flex justify-content-center ">
+      <h4>No item in cart</h4>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>>

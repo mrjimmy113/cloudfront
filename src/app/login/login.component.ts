@@ -1,3 +1,4 @@
+import { LoaderService } from './../loader.service';
 import { Account } from './../model/account';
 
 import { AccountService } from './../account.service';
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   private loginForm;
   isSubmit = false;
-  constructor(private api:AccountService, private router:Router) { }
+  constructor(private api:AccountService, private router:Router,private loader:LoaderService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -30,9 +31,11 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.invalid) {
       return;
     }
+    this.loader.show();
     let loginInfor = this.loginForm.value;
     this.api.login(loginInfor.username, loginInfor.password).subscribe(result => {
       if(result.toString() == 'N') {
+        this.loader.hide();
         return;
       }
       let account = result;    
@@ -40,6 +43,8 @@ export class LoginComponent implements OnInit {
       if(account.isAdmin) {
         this.router.navigate(['admin/dashboard'])
       }
+      this.loader.hide();
+      this.router.navigate(['/']);
     });
   }
 

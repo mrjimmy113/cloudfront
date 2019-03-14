@@ -1,3 +1,4 @@
+import { LoaderService } from './../loader.service';
 import { AccountService } from './../account.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,22 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminAccountDashComponent implements OnInit {
   accountList;
-  constructor(private accountSer: AccountService) { }
+  constructor(private accountSer: AccountService,private loader:LoaderService) { }
 
   ngOnInit() {
     this.prepareData();
   }
 
   prepareData() {
-    this.accountSer.getALL().subscribe(result => this.accountList = result);
+    this.loader.show();
+    this.accountSer.getALL().subscribe(result => {
+      this.accountList = result
+      this.loader.hide();
+    });
   }
   deleteGear(id) {
     if(confirm('Do you want to delete this account')) {
+      this.loader.show();
       this.accountSer.delete(id).subscribe(result => this.prepareData());
     }
     
   }
   makeAdmin(id) {
+    this.loader.show();
     this.accountSer.makeAdmin(id).subscribe(result => this.prepareData());
     
   }

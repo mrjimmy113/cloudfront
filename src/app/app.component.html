@@ -1,26 +1,54 @@
+<!--Modal-->
+<div id="modal-container" class="modal-container" class="hidden"></div>
+<div id="overlay" class="overlay" (click)="removeModal()" class="hidden"></div>
+<div id="loader" class="hidden">
+  <div class="d-flex align-items-center overlay justify-content-center">
+    <div class="spinner-border spinner-border-sm text-info" style="width: 10rem; height: 10rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
+
+<!--Header-->
 <div class="navbar navbar-dark bg-dark">
-  <div class="col-sm-3 d-flex justify-content-around">
-    <span class="">Logo</span>
+  <div class="col-sm-2 d-flex justify-content-around">
+    <a href="/"><span class="text-white">Logo</span></a>
   </div>
   <div class="col-sm-6">
     <form #searchForm="ngForm" (ngSubmit)="searchOp()">
       <div class="row">
         <input class="form-control col-sm-10" type="text" placeholder="Search" name="search" [(ngModel)]="searchText"
           #search="ngModel" required>
-        <button class="btn btn-info col-sm-2"  [disabled]="!searchForm.form.valid">Search</button>
+        <button class="btn btn-info col-sm-2" [disabled]="!searchForm.form.valid">Search</button>
       </div>
     </form>
   </div>
-  <div class="col-sm-3 d-flex justify-content-end">
+  <div class="col-sm-4  d-flex justify-content-end">
 
     <div *ngIf="!checkLogin()">
       <a class="btn btn-info" href="/login">Login</a>
       <a class="btn btn-info" href="/signUp">Sign Up</a>
+
     </div>
     <div *ngIf="checkLogin()">
       <a href="/accountInfor" class="text-success">{{name}} </a>
       <button class="btn btn-danger" (click)="logout()">Log out</button>
     </div>
+    <a class="btn btn-info" href="/cart">Cart</a>
   </div>
 </div>
+<!--Type List-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-center">
+
+
+  <div class="" id="navbarColor02">
+    <ul class="navbar-nav mr-auto ">
+      <li class="nav-item" *ngFor="let type of typeList">
+        <a class="nav-link" href="/type/{{type.id}}" [ngClass]="{'active': activeTypeId == type.id}">{{type.name}}</a>
+      </li>
+
+    </ul>
+
+  </div>
+</nav>
 <router-outlet></router-outlet>

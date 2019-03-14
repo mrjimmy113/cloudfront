@@ -1,3 +1,4 @@
+import { LoaderService } from './../loader.service';
 import { GearService } from './../gear.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,7 +12,7 @@ import { TypeService } from '../type.service';
 export class AdminGearDashComponent implements OnInit {
   gearList;
   typeList;
-  constructor(private gearSer:GearService, private router:Router, private typeSer:TypeService) { }
+  constructor(private gearSer:GearService, private router:Router, private typeSer:TypeService,private loader:LoaderService) { }
 
   ngOnInit() {
     this.prepareData();
@@ -19,10 +20,15 @@ export class AdminGearDashComponent implements OnInit {
   }
 
   prepareData() {
-    this.gearSer.getALL().subscribe(result => this.gearList = result);
+    this.loader.show();
+    this.gearSer.getALL().subscribe(result => {
+      this.gearList = result
+      this.loader.hide();
+    });
   }
   deleteGear(infor) {
     if(confirm("Are you sure to delete this gear ?")) {
+      this.loader.show();
       this.gearSer.deleteGear(infor).subscribe(result => {
         if(result == '200') {
           this.prepareData();
@@ -35,7 +41,6 @@ export class AdminGearDashComponent implements OnInit {
       gear: JSON.stringify(gear),
       typeList: JSON.stringify(this.typeList)
     };
-    console.log(infor);
     this.router.navigate(['admin/gear/update', infor]);
   }
 }

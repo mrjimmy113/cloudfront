@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminDashComponent } from './admin-dash/admin-dash.component';
-import { AdminGearComponent } from './admin-gear/admin-gear.component';
 import { AdminGearInsertComponent } from './admin-gear-insert/admin-gear-insert.component';
 import { AdminGearDashComponent } from './admin-gear-dash/admin-gear-dash.component';
 import { AdminGearUpdateComponent } from './admin-gear-update/admin-gear-update.component';
@@ -14,13 +12,16 @@ import { AccountRegComponent } from './account-reg/account-reg.component';
 import { AccountUpdateComponent } from './account-update/account-update.component';
 import { AdminAccountDashComponent } from './admin-account-dash/admin-account-dash.component';
 import { SearchComponent } from './search/search.component';
+import { GearDetailComponent } from './gear-detail/gear-detail.component';
+import { CartComponent } from './cart/cart.component';
+import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { GearTypeComponent } from './gear-type/gear-type.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminDashComponent,
-    AdminGearComponent,
     AdminGearInsertComponent,
     AdminGearDashComponent,
     AdminGearUpdateComponent,
@@ -28,6 +29,11 @@ import { SearchComponent } from './search/search.component';
     AccountUpdateComponent,
     AdminAccountDashComponent,
     SearchComponent,
+    GearDetailComponent,
+    CartComponent,
+    AdminOrderComponent,
+    GearTypeComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,9 @@ import { SearchComponent } from './search/search.component';
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:  [
+    GearDetailComponent
+  ]
 })
 export class AppModule { }

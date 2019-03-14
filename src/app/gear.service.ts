@@ -15,6 +15,8 @@ export class GearService {
   private updateAPI = "gear/update";
   private getPageAPI = "gear/getPage/";
   private getMaxPageAPI = "gear/getMaxPage/";
+  private getPageTypeAPI = "gear/getPageType/";
+  private getMaxPageTypeAPI = "gear/getMaxPageType/";
   constructor(private http: HttpClient) { }
 
   create(gear):Observable<string> {
@@ -35,5 +37,11 @@ export class GearService {
   }
   getMaxPage(search):Observable<string> {
     return this.http.get<string>(environment.apiEndPoint + this.getMaxPageAPI + search);
+  }
+  getPageType(id,page):Observable<Gear[]> {
+    return this.http.get<Gear[]>(environment.apiEndPoint + this.getPageTypeAPI + id + "&" + page);
+  }
+  getMaxPageType(id):Observable<string> {
+    return this.http.get<string>(environment.apiEndPoint + this.getMaxPageTypeAPI + id);
   }
 }

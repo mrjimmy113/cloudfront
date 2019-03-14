@@ -14,7 +14,7 @@
         <img src="{{gear.avatarURL}}" width="100px" height="100px" />
       </th>
       <td class="align-middle">{{gear.name}}</td>
-      <td class="align-middle">{{gear.price}}</td>
+      <td class="align-middle">{{gear.price | number}}&#8363;</td>
       <td class="align-middle">
         <button class="btn btn-info" (click)="goToUpdate(gear)">UPDATE</button>
         <button class="btn btn-danger" (click)="deleteGear(gear)">DELETE</button>

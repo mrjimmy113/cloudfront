@@ -1,3 +1,4 @@
+import { LoaderService } from './../loader.service';
 import { AccountService } from './../account.service';
 import { Account } from './../model/account';
 import { Component, OnInit } from '@angular/core';
@@ -16,14 +17,15 @@ export class AccountUpdateComponent implements OnInit {
   oldPassword;
   orderList;
   wrongOldPass = false;
-  totalList = new Array();
-  constructor(private accountSer:AccountService, private orderSer:OrderService) { }
+  totalList;
+  constructor(private accountSer:AccountService, private orderSer:OrderService, private loader:LoaderService) { }
 
   ngOnInit() {
     this.account = JSON.parse(sessionStorage.getItem('account'));
   }
 
   changeTab(num) {
+    console.log(num);
     if(num == 1 || num == 2) {
       this.resetInfor();
     }
@@ -36,10 +38,12 @@ export class AccountUpdateComponent implements OnInit {
     this.account = JSON.parse(sessionStorage.getItem('account'));
   }
   changeInfor() {
+    this.loader.show();
     if(JSON.stringify(this.account) != sessionStorage.getItem('account')){
       this.accountSer.changeInfor(this.account).subscribe(result => {
         this.account = result
         sessionStorage.setItem('account', JSON.stringify(this.account));
+        this.loader.hide();
       }); 
       
     }
@@ -49,20 +53,26 @@ export class AccountUpdateComponent implements OnInit {
     if(this.oldPassword == this.account.password) {
       this.wrongOldPass = false;
       this.account.password = this.newPassword;
+      this.loader.show();
       this.accountSer.changePassword(this.account).subscribe(result =>{
         this.account = result;
         sessionStorage.setItem('account', JSON.stringify(this.account));
+        this.loader.hide();
       })
     }else {
       this.wrongOldPass = true;
     }
   }
   cancel(id) {
-    this.orderSer.deleteOrder(id).subscribe(() => {
-      this.orderPrepare();
-    })
+    if(confirm('Are you sure to cancel this order')) {
+      this.orderSer.deleteOrder(id).subscribe(() => {
+        this.orderPrepare();
+      })
+    }
   }
   orderPrepare() {
+    this.loader.show();
+    this.totalList = new Array();
     this.orderSer.getOrderAccId(this.account.id).subscribe(result => {
       this.orderList = result;
       for (let i = 0; i < this.orderList.length; i++) {
@@ -72,6 +82,7 @@ export class AccountUpdateComponent implements OnInit {
         }
         this.totalList.push(total);
       }
+      this.loader.hide();
     });
   }
 }
