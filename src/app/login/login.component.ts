@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.api.login(loginInfor.username, loginInfor.password).subscribe(result => {
       if(result.toString() == 'N') {
         this.loader.hide();
+        alert('Username or Password is wrong')
         return;
       }
       let account = result;    

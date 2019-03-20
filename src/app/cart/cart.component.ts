@@ -1,5 +1,6 @@
 import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class CartComponent implements OnInit {
   private orderList;
   private total = 0;
-  constructor(private cartSer: CartService) { }
+  constructor(private cartSer: CartService, private router:Router) { }
 
   ngOnInit() {
     let tmp = this.cartSer.getCart();
@@ -31,6 +32,7 @@ export class CartComponent implements OnInit {
   removeItem(order) {
     this.cartSer.removeFromCart(order);
     this.orderList = this.cartSer.getCart();
+    this.updateView();
   }
   updateView() {
     this.total = 0;
@@ -42,7 +44,11 @@ export class CartComponent implements OnInit {
   }
 
   submitOrder() {
-    this.cartSer.submitCart().subscribe(result => this.cartSer.clearCart());
+    this.cartSer.submitCart().subscribe(result => {
+      this.cartSer.clearCart();
+      alert('Your order is submited');
+      this.router.navigate(['/']);
+    });
   }
 
 }

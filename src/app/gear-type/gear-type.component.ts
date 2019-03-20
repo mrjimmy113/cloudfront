@@ -1,3 +1,5 @@
+import { ModalService } from './../modal.service';
+import { GearDetailComponent } from './../gear-detail/gear-detail.component';
 import { LoaderService } from './../loader.service';
 import { AppComponent } from './../app.component';
 import { GearService } from './../gear.service';
@@ -14,7 +16,8 @@ export class GearTypeComponent implements OnInit {
   gearList;
   currentPage = 1;
   maxPage = 0;
-  constructor(private route:ActivatedRoute, private gearSer:GearService, private app:AppComponent,private loader:LoaderService) { }
+  constructor(private route:ActivatedRoute, private gearSer:GearService,
+     private app:AppComponent,private loader:LoaderService, private modelSer:ModalService) { }
 
   ngOnInit() {
     this.loader.show();
@@ -43,5 +46,8 @@ export class GearTypeComponent implements OnInit {
   }
   public getCurrentTypeId() {
     return this.id;
+  }
+  showDetail(gear) {
+    this.modelSer.init(GearDetailComponent,gear,{});
   }
 }

@@ -4,6 +4,7 @@ import { Account } from './../model/account';
 import { Component, OnInit } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { OrderService } from '../order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-update',
@@ -18,7 +19,7 @@ export class AccountUpdateComponent implements OnInit {
   orderList;
   wrongOldPass = false;
   totalList;
-  constructor(private accountSer:AccountService, private orderSer:OrderService, private loader:LoaderService) { }
+  constructor(private accountSer:AccountService, private orderSer:OrderService, private loader:LoaderService, private router:Router) { }
 
   ngOnInit() {
     this.account = JSON.parse(sessionStorage.getItem('account'));
@@ -58,6 +59,7 @@ export class AccountUpdateComponent implements OnInit {
         this.account = result;
         sessionStorage.setItem('account', JSON.stringify(this.account));
         this.loader.hide();
+        alert('Password has been updated');
       })
     }else {
       this.wrongOldPass = true;

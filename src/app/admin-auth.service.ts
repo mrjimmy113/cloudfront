@@ -30,7 +30,7 @@ export class AdminAuthService implements CanActivateChild, CanActivate{
       this.route.navigate(['login']);
       return false;
     }
-    console.log('cl');
+
     return true;
     
   }

@@ -1,3 +1,4 @@
+import { ModalService } from './../modal.service';
 import { CartService } from './../cart.service';
 import { OrderDetail } from './../model/orderDetail';
 import { Gear } from './../model/gear';
@@ -11,7 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class GearDetailComponent implements OnInit {
   @Input()inputs: Object
   private gear:Gear;
-  constructor(private cartSer: CartService) { }
+  constructor(private cartSer: CartService, private modalSer: ModalService) { }
 
   ngOnInit() {
     this.gear =<Gear> this.inputs;
@@ -23,9 +24,9 @@ export class GearDetailComponent implements OnInit {
       quantity: 1,
       price: this.gear.price
     }
-    console.log('CL');
     this.cartSer.addToCart(order);
-    
+    alert('Item has been added to cart');
+    this.modalSer.destroy();
   }
 
 }

@@ -42,8 +42,8 @@ export class CartService {
           break;
         }
       }
-      console.log(orderList);
-      localStorage.setItem(this.cartItem, JSON.stringify(orderList));
+      if(orderList.length ==0 ) this.clearCart();
+      else localStorage.setItem(this.cartItem, JSON.stringify(orderList));
     }
   }
   getCart(): Array<OrderDetail> {

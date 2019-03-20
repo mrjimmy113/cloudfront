@@ -34,11 +34,13 @@ export class SearchComponent implements OnInit {
     this.gearList = this.gearSer.getPage(searchText,pageNum).subscribe(
       result => {
         this.gearList = result
+        this.loader.hide();
       }
     );
     
   }
   loadPage(pageNum) {
+    this.loader.show();
     this.currentPage = pageNum;
     this.preparePage(this.searchText, pageNum);
   }

@@ -130,10 +130,11 @@
         </div>
         <!--Action Button-->
         <div class="d-flex justify-content-around">
-          <button type="submit" class="btn btn-info" [disabled]='!accountForm.form.valid'>Sign Up</button>
+          <button type="submit" class="btn btn-info" [disabled]='!accountForm.form.valid || !isAccountExisted'>Sign Up</button>
           <button type="reset" class="btn btn-info">Reset</button>
         </div>
       </fieldset>
+    
     </form>
   </div>
   <div class="col-sm-4"></div>
