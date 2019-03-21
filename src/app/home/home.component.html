@@ -1,3 +1,20 @@
-<p>
-  home works!
-</p>
+<div class="d-flex justify-content-center">
+  <h1>Welcome to Gear Shop</h1>
+  
+</div>
+<div class="d-flex justify-content-center">
+  <table>
+    <tbody>
+      <tr>
+        <th *ngFor="let gear of gearList, let i = index">
+          <img src="{{gear.avatarURL}}" width="200" height="200" *ngIf="(i % 2) == 0">
+        </th>
+      </tr>
+      <tr>
+          <th *ngFor="let gear of gearList, let i = index">
+            <img src="{{gear.avatarURL}}" width="200" height="200" *ngIf="(i % 2) == 1">
+          </th>
+        </tr>
+    </tbody>
+  </table>
+</div>

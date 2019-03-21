@@ -17,6 +17,7 @@ export class GearService {
   private getMaxPageAPI = "gear/getMaxPage/";
   private getPageTypeAPI = "gear/getPageType/";
   private getMaxPageTypeAPI = "gear/getMaxPageType/";
+  private getRandomAPI = "gear/getRandom/";
   constructor(private http: HttpClient) { }
 
   create(gear):Observable<string> {
@@ -43,5 +44,8 @@ export class GearService {
   }
   getMaxPageType(id):Observable<string> {
     return this.http.get<string>(environment.apiEndPoint + this.getMaxPageTypeAPI + id);
+  }
+  getRandom(num):Observable<Gear[]> {
+    return this.http.get<Gear[]>(environment.apiEndPoint + this.getRandomAPI + num);
   }
 }

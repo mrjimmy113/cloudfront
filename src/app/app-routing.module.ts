@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { AdminAuthService as AdminAuth} from './admin-auth.service';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { CartComponent } from './cart/cart.component';
@@ -13,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { SearchComponent } from './search/search.component';
 import { GearTypeComponent } from './gear-type/gear-type.component';
 const routes: Routes = [
+  {path:'', component: HomeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'signUp', component: AccountRegComponent },
   { path: 'search/:value', component: SearchComponent },
