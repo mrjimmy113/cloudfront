@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private loginForm;
+  loginForm;
   isSubmit = false;
   constructor(private api:AccountService, private router:Router,private loader:LoaderService) { }
 

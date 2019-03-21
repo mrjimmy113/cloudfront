@@ -11,7 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class GearDetailComponent implements OnInit {
   @Input()inputs: Object
-  private gear:Gear;
+  gear:Gear;
   constructor(private cartSer: CartService, private modalSer: ModalService) { }
 
   ngOnInit() {

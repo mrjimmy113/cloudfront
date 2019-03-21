@@ -6,5 +6,6 @@ export class Account {
     lastName:string;
     phoneNumber:string;
     createdDate: Date;
+    address:string;
     isAdmin:boolean;
 }

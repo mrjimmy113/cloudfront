@@ -17,6 +17,7 @@ export class AccountUpdateComponent implements OnInit {
   newPassword;
   oldPassword;
   orderList;
+  confirmPassword;
   wrongOldPass = false;
   totalList;
   constructor(private accountSer:AccountService, private orderSer:OrderService, private loader:LoaderService, private router:Router) { }

@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  private orderList;
-  private total = 0;
+  orderList;
+  total = 0;
   constructor(private cartSer: CartService, private router:Router) { }
 
   ngOnInit() {
