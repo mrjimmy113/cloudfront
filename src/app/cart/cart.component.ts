@@ -1,3 +1,4 @@
+import { LoaderService } from './../loader.service';
 import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit {
   orderList;
   total = 0;
-  constructor(private cartSer: CartService, private router:Router) { }
+  constructor(private cartSer: CartService, private router:Router, private loader:LoaderService) { }
 
   ngOnInit() {
     let tmp = this.cartSer.getCart();
@@ -44,11 +45,18 @@ export class CartComponent implements OnInit {
   }
 
   submitOrder() {
-    this.cartSer.submitCart().subscribe(result => {
-      this.cartSer.clearCart();
-      alert('Your order is submited');
-      this.router.navigate(['/']);
-    });
+      let acc = sessionStorage.getItem('account');
+      if(acc) {
+        this.loader.show();
+        this.cartSer.submitCart().subscribe(result => {
+          this.cartSer.clearCart();
+          alert('Your order is submited');
+          this.loader.hide();
+          this.router.navigate(['/']);
+        });
+      }else {
+        this.router.navigate(['/login']);
+      }
   }
 
 }
